@@ -9,12 +9,7 @@
 # - TF_VAR_gce_instance_name
 provider "google" {}
 
-# resource "google_service_account" "default" {
-#   account_id   = "service_account_id"
-#   display_name = "Service Account"
-# }
-
-variable "google_zone" {
+variable "gce_zone" {
     type = string
 }
 
@@ -48,7 +43,7 @@ data "google_compute_network" "default" {
 resource "google_compute_instance" "instance" {
   name         = var.gce_instance_name
   machine_type = "f1-micro"
-  zone         = var.google_zone
+  zone         = var.gce_zone
 
   boot_disk {
     initialize_params {
