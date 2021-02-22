@@ -160,6 +160,6 @@ resource "google_monitoring_alert_policy" "alert_policy" {
   }
 }
 
-output "gce-external-ip" {
+output "gce_external_ip" {
     value = google_compute_address.static.address
 }
