@@ -131,6 +131,24 @@ resource "google_compute_firewall" "ssh" {
     target_tags = [ "allow-ssh" ]
 }
 
+resource "google_monitoring_alert_policy" "alert_policy" {
+  display_name = "GCP Compute Free Egress"
+  combiner     = "OR"
+  conditions {
+    display_name = "Daily GCP Compute Egress Too High For Free Tier"
+    condition_threshold {
+      filter     = "metric.type=\"compute.googleapis.com/instance/network/sent_bytes_count\" AND resource.type=\"gce_instance\""
+      duration   = "86400s"
+      comparison = "COMPARISON_GT"
+      threshold_value = 35791394
+      aggregations {
+        alignment_period   = "3600s"
+        per_series_aligner = "ALIGN_RATE"
+      }
+    }
+  }
+}
+
 output "gce-external-ip" {
     value = google_compute_address.static.address
 }

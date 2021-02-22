@@ -13,6 +13,7 @@ In that project, creat a _Service Account_ for the project with the following ro
 - _Compute Instance Admin_
 - _Compute Network Admin_
 - _Compute Security Admin_
+- _Monitoring Admin_
 
 ## Required Terraform credentials/environment variables
 Set the following environment variables for the `google` Terraform provider:
