@@ -31,6 +31,7 @@ In addition to the environment variables listed above, the examples expect the f
 - `TF_VAR_GCE_ZONE`
 - `TF_VAR_SSH_PUBKEY_FILE`
 - `TF_VAR_SSH_USER`
+- `TF_VAR_NOTIFICATION_CHANNEL_NAME` (Optional; set if you want to receive alerts when on track to exceed free tier thresholds)
 
 ## Modules
 

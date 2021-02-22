@@ -27,6 +27,10 @@ variable "gce_ssh_user" {
     default = "nonroot"
 }
 
+variable "notification_channel_display_name" {
+    type = string
+}
+
 resource "google_compute_address" "static" {
   name = "${var.gce_instance_name}-ipv4-address"
 }
@@ -131,9 +135,16 @@ resource "google_compute_firewall" "ssh" {
     target_tags = [ "allow-ssh" ]
 }
 
+data "google_monitoring_notification_channel" "default" {
+  count = var.notification_channel_display_name != "" ? 1 : 0
+  display_name = var.notification_channel_display_name
+}
+
 resource "google_monitoring_alert_policy" "alert_policy" {
+  count = length(data.google_monitoring_notification_channel.default) > 0 ? 1 : 0
   display_name = "GCP Compute Free Egress"
-  combiner     = "OR"
+  notification_channels = [ data.google_monitoring_notification_channel.default[0].name ]
+  combiner = "OR"
   conditions {
     display_name = "Daily GCP Compute Egress Too High For Free Tier"
     condition_threshold {
