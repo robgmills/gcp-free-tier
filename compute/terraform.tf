@@ -7,7 +7,7 @@
 #
 # Optionally, provide the following environment variables to further configure the deployment:
 # - TF_VAR_gce_instance_name
-provider "google" {}
+#provider "google" {}
 
 variable "gce_zone" {
     type = string
