@@ -7,6 +7,7 @@
 #
 # Optionally, provide the following environment variables to further configure the deployment:
 # - TF_VAR_gce_instance_name
+
 #provider "google" {}
 
 variable "gce_zone" {
@@ -46,7 +47,7 @@ data "google_compute_network" "default" {
 
 resource "google_compute_instance" "instance" {
   name         = var.gce_instance_name
-  machine_type = "f1-micro"
+  machine_type = "e2-micro"
   zone         = var.gce_zone
 
   boot_disk {
